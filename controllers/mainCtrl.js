@@ -1,6 +1,7 @@
 
 var user = require('../user.js');
 var userSkills = require('../skills.js');
+var secret = require('../controllers/secrets.js');
 module.exports = {
 
 
@@ -99,5 +100,16 @@ getRestaurantsByName:function(req,res) {
  postSkill:function (req,res,next) {
    userSkills.push(req.body);
    res.json({skills:userSkills});
+ },
+ secret:function(req,res,next) {
+   var userName = 'Gabriel';
+   var pin = "450";
+   if(req.params.username === userName && req.params.pin === pin){
+     res.status(200).json({secrets: secret});
+   }
+   else{
+     res.status(200).json({Not:userName});
+   }
+  //  res.status(200).json({})
  }
 };
